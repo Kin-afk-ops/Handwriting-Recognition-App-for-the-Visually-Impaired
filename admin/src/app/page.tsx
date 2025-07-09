@@ -1,3 +1,4 @@
+import ImagesChart from "@/components/charts/ImagesChart";
 import UsersChart from "@/components/charts/UsersChart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -7,24 +8,22 @@ export default function Home() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className="pl-[30px] text-xl">
-              Số lượng người dùng
-            </CardTitle>
+            <CardTitle className="pl-6 text-xl">Số lượng người dùng</CardTitle>
           </CardHeader>
           <CardContent className="h-[300px]">
             <UsersChart />
           </CardContent>
         </Card>
-        {/* 
-        <Card>
+
+        <Card className="mt-8">
           <CardHeader>
-            <CardTitle>Số lượng ảnh</CardTitle>
+            <CardTitle className="pl-6 text-xl">Số lượng ảnh</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="h-[300px]">
             <ImagesChart />
           </CardContent>
         </Card>
-
+        {/* 
         <Card>
           <CardHeader>
             <CardTitle>Phản hồi người dùng</CardTitle>

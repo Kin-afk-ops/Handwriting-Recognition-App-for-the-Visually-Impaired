@@ -41,7 +41,9 @@ const UsersChart = () => {
   return (
     <div className="space-y-4">
       {/* Bộ lọc năm */}
-      <div className="w-40">
+      <div className="w-50 flex items-center">
+        <span className="mr-2">Chọn năm</span>
+
         <Select value={selectedYear} onValueChange={setSelectedYear}>
           <SelectTrigger>
             <SelectValue placeholder="Chọn năm" />
