@@ -1,0 +1,1 @@
+docker exec -t postgres pg_dump -U postgres -F c -d postgres -f /var/lib/postgresql/data/backup_2025-06-30.dump
