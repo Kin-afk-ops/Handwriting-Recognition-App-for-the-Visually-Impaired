@@ -17,7 +17,7 @@
 
 ### 🧠 1. AI Service (Chạy trên Google Colab)
 
-- Mở file notebook AI trên Google Colab.
+- Mở file notebook AI (Handwriting_Recognition_App_AI.ipynb) trên Google Colab.
 - Kết nối với GPU (T4 nếu có).
 - Chạy toàn bộ cell.
 - **Lưu ý:** Cần đăng ký dịch vụ của [ngrok](https://ngrok.com/) và thêm Token tên miền để sử dụng.
