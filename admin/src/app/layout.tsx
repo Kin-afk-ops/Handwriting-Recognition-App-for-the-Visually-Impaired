@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./grid.css";
-import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
-
-import SiteHeader from "@/components/SiteHeader";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { redirect, RedirectType } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,27 +32,7 @@ export default function RootLayout({
       >
         <div className="flex flex-1">
           <main className="flex-1 p-4">
-            <SidebarProvider
-              style={
-                {
-                  "--sidebar-width": "calc(var(--spacing) * 72)",
-                  "--header-height": "calc(var(--spacing) * 12)",
-                } as React.CSSProperties
-              }
-            >
-              <Sidebar />
-              <SidebarInset>
-                <SiteHeader />
-
-                <div className="flex flex-1 flex-col">
-                  <div className="@container/main flex flex-1 flex-col gap-2">
-                    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-                      <div className="px-4 lg:px-6">{children}</div>
-                    </div>
-                  </div>
-                </div>
-              </SidebarInset>
-            </SidebarProvider>
+            <div className="px-4 lg:px-6">{children}</div>
           </main>
         </div>
         <Footer />
