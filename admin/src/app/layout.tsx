@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./grid.css";
 import Footer from "@/components/Footer";
-import { redirect, RedirectType } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +34,7 @@ export default function RootLayout({
           <main className="flex-1 p-4">
             <div className="px-4 lg:px-6">{children}</div>
           </main>
+          <Toaster />
         </div>
         <Footer />
       </body>

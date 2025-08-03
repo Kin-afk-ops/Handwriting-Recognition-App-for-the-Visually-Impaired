@@ -14,29 +14,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import axiosInstance from "@/api/axiosInstance";
 
-const ImagesChart = () => {
-  const allImageData = [
-    { month: "Jan", images: 150, year: 2023 },
-    { month: "Feb", images: 200, year: 2023 },
-    { month: "Mar", images: 250, year: 2023 },
-    { month: "Apr", images: 300, year: 2023 },
-    { month: "May", images: 180, year: 2023 },
-    { month: "Jun", images: 220, year: 2023 },
-    { month: "Jan", images: 220, year: 2024 },
-    { month: "Feb", images: 280, year: 2024 },
-    { month: "Mar", images: 310, year: 2024 },
-    { month: "Apr", images: 400, year: 2024 },
-    { month: "May", images: 390, year: 2024 },
-    { month: "Jun", images: 450, year: 2024 },
-  ];
+interface ChildProps {
+  data:
+    | {
+        month: number;
+        images: number;
+        year: number;
+      }[]
+    | null;
+}
 
-  const [selectedYear, setSelectedYear] = useState<string>("2024");
+const ImagesChart: React.FC<ChildProps> = ({ data }) => {
+  const [selectedYear, setSelectedYear] = useState<string>("2025");
 
-  const filteredData = allImageData.filter(
-    (item) => item.year.toString() === selectedYear
-  );
+  const years = useMemo(() => {
+    if (!data) return [];
+    const uniqueYears = Array.from(new Set(data.map((item) => item.year)));
+    return uniqueYears.sort((a, b) => b - a).map(String); // sort giảm dần, convert thành string
+  }, [data]);
+
+  useEffect(() => {
+    if (years.length > 0 && !years.includes(selectedYear)) {
+      setSelectedYear(years[0]); // chọn năm mới nhất
+    }
+  }, [years, selectedYear]);
+
+  const transformedData = useMemo(() => {
+    if (!data) return [];
+
+    const monthNames = [
+      "Tháng 1",
+      "Tháng 2",
+      "Tháng 3",
+      "Tháng 4",
+      "Tháng 5",
+      "Tháng 6",
+      "Tháng 7",
+      "Tháng 8",
+      "Tháng 9",
+      "Tháng 10",
+      "Tháng 11",
+      "Tháng 12",
+    ];
+
+    return data
+      .filter((item) => item.year.toString() === selectedYear)
+      .map((item) => ({
+        ...item,
+        month: monthNames[item.month - 1],
+      }));
+  }, [data, selectedYear]);
+  if (!data) return <p>Lỗi không tải được dữ liệu!</p>;
 
   return (
     <div className="space-y-4">
@@ -48,15 +79,18 @@ const ImagesChart = () => {
             <SelectValue placeholder="Chọn năm" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="2023">2023</SelectItem>
-            <SelectItem value="2024">2024</SelectItem>
+            {years.map((year) => (
+              <SelectItem key={year} value={year}>
+                {year}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       </div>
 
       {/* Biểu đồ */}
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={filteredData}>
+        <BarChart data={transformedData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <Tooltip />
