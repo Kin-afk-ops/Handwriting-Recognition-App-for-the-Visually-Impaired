@@ -3,6 +3,7 @@ import {
   LayoutDashboard,
   MessageCircleReply,
   User,
+  UserRoundCog,
   type LucideIcon,
 } from "lucide-react";
 export interface NavItem {
@@ -31,5 +32,10 @@ export const navMain: NavItem[] = [
     title: "Phản hồi người dùng",
     url: "feedbacks",
     icon: MessageCircleReply,
+  },
+  {
+    title: "Quản lý admin",
+    url: "admins",
+    icon: UserRoundCog,
   },
 ];
