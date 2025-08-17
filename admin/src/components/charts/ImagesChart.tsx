@@ -15,7 +15,6 @@ import {
   SelectValue,
 } from "../ui/select";
 import { useEffect, useMemo, useState } from "react";
-import axiosInstance from "@/api/axiosInstance";
 
 interface ChildProps {
   data:

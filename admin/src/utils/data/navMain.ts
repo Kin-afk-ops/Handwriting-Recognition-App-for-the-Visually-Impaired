@@ -33,6 +33,29 @@ export const navMain: NavItem[] = [
     url: "feedbacks",
     icon: MessageCircleReply,
   },
+];
+
+export const navMainSuperadmin: NavItem[] = [
+  {
+    title: "Tổng quan",
+    url: "#",
+    icon: LayoutDashboard,
+  },
+  {
+    title: "Người dùng",
+    url: "users",
+    icon: User,
+  },
+  {
+    title: "Ảnh nhận dạng",
+    url: "images",
+    icon: Image,
+  },
+  {
+    title: "Phản hồi người dùng",
+    url: "feedbacks",
+    icon: MessageCircleReply,
+  },
   {
     title: "Quản lý admin",
     url: "admins",

@@ -15,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import axiosInstance from "@/api/axiosInstance";
 
 interface ChildProps {
   data:

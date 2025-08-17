@@ -16,7 +16,7 @@ import {
   LogOut,
   UserRoundCog,
 } from "lucide-react";
-import { navMain } from "@/utils/data/navMain";
+import { navMain, navMainSuperadmin } from "@/utils/data/navMain";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuthStore } from "../../store/authStore";
 import axiosInstance from "@/api/axiosInstance";
@@ -33,12 +33,14 @@ const SiteHeader = () => {
   const hasHydrated = useAuthStore((state) => state.hasHydrated);
   const logout = useAuthStore((state) => state.logout);
 
+  const items = user?.role === "super_admin" ? navMainSuperadmin : navMain;
+
   const getTitle = (): string => {
     if (segment === "myAccount") {
       const found = "Thay đổi mật khẩu";
       return found;
     }
-    const found = navMain.find((nav) => nav.url === segment);
+    const found = items.find((nav) => nav.url === segment);
     return found ? found.title : "Lỗi"; // hoặc fallback khác
   };
 

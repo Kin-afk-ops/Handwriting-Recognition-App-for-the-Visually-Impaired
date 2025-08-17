@@ -2,7 +2,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import { PlusCircle, Mail, type LucideIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,

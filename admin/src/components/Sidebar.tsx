@@ -1,5 +1,5 @@
 "use client";
-import { navMain } from "@/utils/data/navMain";
+import { navMain, navMainSuperadmin } from "@/utils/data/navMain";
 import { NavMain } from "./NavMain";
 import {
   Sidebar as SidebarRoot,
@@ -9,10 +9,22 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
+import { useAuthStore } from "../../store/authStore";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Sidebar: React.FC = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {
+  const router = useRouter();
+
+  const user = useAuthStore((state) => state.user);
+  const hasHydrated = useAuthStore((state) => state.hasHydrated);
+
+  if (!hasHydrated) return null; // chờ hydrate xong
+
+  const items = user?.role === "super_admin" ? navMainSuperadmin : navMain;
+
   return (
     <SidebarRoot collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -30,7 +42,7 @@ const Sidebar: React.FC = ({
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navMain} />
+        <NavMain items={items} />
       </SidebarContent>
     </SidebarRoot>
   );
